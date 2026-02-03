@@ -1,0 +1,12 @@
+node_modules/
+*.log
+run_result.txt
+homepage.html
+scraper_log.txt
+output.log
+final_results.log
+final_run.log
+failure_debug.png
+homepage_debug.png
+winner.png
+final_output.log
