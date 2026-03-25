@@ -51,7 +51,7 @@ const { chromium } = require('playwright');
             // This is often more reliable than specific selectors if site changes
             const allElements = document.querySelectorAll('span, a, div, vf-conversations-count');
             allElements.forEach(el => {
-                const text = el.innerText.trim();
+                const text = (el.innerText || el.textContent || "").trim();
                 const match = text.match(/^(\d+,?\d*)\s+Comments$/i) || text.match(/^(\d+,?\d*)$/);
 
                 if (match) {
@@ -103,7 +103,11 @@ const { chromium } = require('playwright');
             console.log('--------------------------------------------------');
 
             const top = uniqueArticles[0];
-            console.log(`\nNavigating to most commented: "${top.title}"`);
+            console.log('\n🏆 THE MOST COMMENTED ARTICLE IS:');
+            console.log(`" ${top.title.toUpperCase()} "`);
+            console.log(`With ${top.count} comments.\n`);
+
+            console.log(`Navigating to most commented: "${top.title}"`);
             await page.goto(top.url, { waitUntil: 'load', timeout: 60000 });
 
             // Wait for comments section to load on the article page
@@ -113,6 +117,10 @@ const { chromium } = require('playwright');
             const screenshotName = 'most_commented_article.png';
             await page.screenshot({ path: screenshotName, fullPage: false });
             console.log(`\n[SUCCESS] Screenshot saved as ${screenshotName}`);
+            console.log(`\n[SUCCESS] Navigated to most commented: "${top.title}"`);
+            console.log(`\n[SUCCESS] URL: ${top.url}`);
+            console.log(`\n[SUCCESS] Count: ${top.count}`);
+            console.log(`\n Check details of other articles above.`);
         }
 
     } catch (err) {
