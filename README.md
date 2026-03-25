@@ -40,4 +40,6 @@ The script will open a browser window, perform the automation, and save a result
 - `most_commented_article.png`: Sample result from a successful run.
 
 ---
-Created for practice and portfolio demonstration. Hugs! :)
+Created for practice and demonstration.
+
+Best vibes and wishes for everyone - Chuma.
