@@ -19,7 +19,9 @@ The script is designed to handle the dynamic and heavy nature of the PC Gamer we
 
 * [x] **Dynamic Scraping**: Successfully waits for and extracts counts from third-party widgets.
 * [x] **Resilient Logic**: Handles different types of article layouts and added `innerText` safety checks.
+* [x] **Comprehensive Reports**: Automatically generates a `results.md` file with the Top 5 and the winner.
 * [x] **Clear Summary**: Added a prominent console output segment showing the #1 article winner.
+* [x] **Contextual Notes**: Included a disclaimer explaining that screenshots are layout approximations.
 * [x] **Automated Navigation**: Transitions from data discovery to content viewing automatically.
 * [x] **Visual Evidence**: Generates screenshots for both debugging and final results.
 

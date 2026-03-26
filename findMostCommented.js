@@ -1,4 +1,5 @@
 const { chromium } = require('playwright');
+const fs = require('fs');
 
 (async () => {
     console.log('--- PC Gamer: Most Commented Article Finder ---');
@@ -96,16 +97,36 @@ const { chromium } = require('playwright');
             console.log(`\nFound ${uniqueArticles.length} articles with comments.`);
             console.log('\nTOP 5 MOST COMMENTED:');
             console.log('--------------------------------------------------');
+            console.log('--------------------------------------------------');
+
+            // Collect results for file output
+            let resultsContent = `# PC Gamer: Most Commented Articles Results\n\n`;
+            resultsContent += `*Date: ${new Date().toLocaleString()}*\n\n`;
+            resultsContent += `## Top 5 Most Commented\n\n`;
+            
             uniqueArticles.slice(0, 5).forEach((a, i) => {
-                console.log(`${i + 1}. [${a.count} comments] ${a.title}`);
+                const line = `${i + 1}. [${a.count} comments] ${a.title}`;
+                console.log(line);
                 console.log(`   URL: ${a.url}`);
+                resultsContent += `- **${a.count} comments**: [${a.title}](${a.url})\n`;
             });
             console.log('--------------------------------------------------');
 
             const top = uniqueArticles[0];
-            console.log('\n🏆 THE MOST COMMENTED ARTICLE IS:');
-            console.log(`" ${top.title.toUpperCase()} "`);
-            console.log(`With ${top.count} comments.\n`);
+            const winnerText = `\n🏆 THE MOST COMMENTED ARTICLE IS:\n" ${top.title.toUpperCase()} "\nWith ${top.count} comments.\n`;
+            console.log(winnerText);
+            
+            resultsContent += `\n## 🏆 Winner\n\n**${top.title}**\n\n- **Comments**: ${top.count}\n- **URL**: ${top.url}\n`;
+            resultsContent += `\n---\n*Note: The generated screenshot is an approximation of the article's layout at the time of capture.*\n`;
+
+            // Save results to file
+            const resultsFilePath = 'results.md';
+            fs.writeFileSync(resultsFilePath, resultsContent);
+            console.log(`[FILE] Results summary saved to ${resultsFilePath}`);
+
+            console.log('\n--- NOTE ---');
+            console.log('The upcoming screenshot is an approximation but it\'s the correct article.');
+            console.log('------------\n');
 
             console.log(`Navigating to most commented: "${top.title}"`);
             await page.goto(top.url, { waitUntil: 'load', timeout: 60000 });

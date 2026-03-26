@@ -38,6 +38,7 @@ The script will open a browser window, perform the automation, and save a result
 - `findMostCommented.js`: Core Playwright script.
 - `walkthrough.md`: Detailed explanation of the technical implementation.
 - `most_commented_article.png`: Sample result from a successful run.
+- `results.md`: Results summary from a successful run.
 
 ---
 Created for practice and demonstration.
